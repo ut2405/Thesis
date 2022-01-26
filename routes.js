@@ -145,13 +145,17 @@ module.exports = router => {
 
 
 	router.get('/items/:id/:type', (req,res) => {
-		
+		if (checkToken(req)) {
 		itemsList.getItems(req.params.type)
 
 			.then(result => res.json(result))
 
 			.catch(err => res.status(err.status).json({ message: err.message }));
 			//process.on('unhandledRejection',e =>{throw e;})
+		} else {
+
+			res.status(401).json({ message: 'Invalid Token !' });
+		}
 	});
 
 	router.get('/item/alert', (req,res) => {
