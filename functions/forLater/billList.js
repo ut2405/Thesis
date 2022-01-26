@@ -1,6 +1,6 @@
 'use strict';
 
-const bill = require('../models/bill');
+const bill = require('../../models/forLater/bill');
 
 exports.getBillList = (from, to) => 
 

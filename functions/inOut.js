@@ -2,17 +2,17 @@
 
 const storage = require('../models/storage');
 
-exports.addStorageLine = (productCode, inAmount,outAmount, datetime, user) => 
+exports.addStorageLine = (item, inAmount, outAmount, dateInStock, dateExpiry, price) => 
 
 	new Promise((resolve,reject) => {
 
 		const newStorageLine = new storage({
-
-            datetime: datetime,
-			productCode: productCode,
-			inAmount: inAmount,	
-			outAmount: outAmount,		
-			user: user
+            item: item,
+			inAmount: inAmount,
+			outAmount: outAmount,	
+			dateInStock: dateInStock,		
+			dateExpiry: dateExpiry,
+			price: price
 		});
 
 		newStorageLine.save()
@@ -32,13 +32,4 @@ exports.addStorageLine = (productCode, inAmount,outAmount, datetime, user) =>
 		});
 	});
 
-	exports.deleteStorageLine = (productCode) =>
-
-	new Promise((resolve,reject) => {
-        storage.find().deleteOne({productCode : productCode})
-		
-		.then(bills => resolve({ status: 200, message: 'Bill Deleted Sucessfully !' }))
-
-		.catch(err => reject({ status: 500, message: 'Internal Server Error !' }))
-
-	});
+	

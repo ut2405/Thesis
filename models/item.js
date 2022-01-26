@@ -9,17 +9,16 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const productSchema = mongoose.Schema({ 
-
-	name 			: String,
-	code			: String, 
-	type	        : String,	
-	currentAmount	: Number,
-	maxStock		: Number
-
+const itemSchema = mongoose.Schema({ 	
+	item 			: String,
+	description		: String, 
+	barcode			:  String,
+	type	        : String,
+	maxStock		: Number,
+	sumStorage		:Number	
 });
 
 mongoose.Promise = global.Promise;
 mongoose.connect(url,{ useNewUrlParser: true, useUnifiedTopology: true });
 
-module.exports = mongoose.model('product', productSchema);
+module.exports = mongoose.model('item', itemSchema);

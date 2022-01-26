@@ -1,40 +1,37 @@
 'use strict';
-const typee = require('../models/type');
-const product = require('../models/product');
-exports.updateType = (type, ntype, ndes) =>
+const type = require('../models/type');
+const item = require('../models/item');
+exports.updateType = (typee, ntype, ndes, nmaxStock) =>
 
-	new Promise((resolve,reject) => {
-		product.find().updateMany({type:type}, {type:ntype})	
+	new Promise((resolve,reject) => {		
 		
-		type.find({ type:type })
-        .then(types => {
-            let type = types[0];			
-			type.type=ntype;
-            type.description=ndes;
-			return type.save;
-        })
-		.then(product => resolve({ status: 200, message: 'Type Updated Sucessfully !' }))
+		type.updateOne({type:typee},{type:ntype, description:ndes, maxStock:nmaxStock})
+		.then(() => {			
+			item.updateMany({type:typee}, {$set:{type:ntype}})	
+			.then(()=>{})
+			.catch(err => reject({ status: 500, message: 'Internal Server Error !' }));
+			resolve({ status: 200, message: 'Type Updated Sucessfully !' });
+		})
 
 		.catch(err => reject({ status: 500, message: 'Internal Server Error !' }))
 
 	});
 
-	exports.deleteType = (type) =>
-
+	exports.deleteType = (typee) =>	
 	new Promise((resolve,reject) => {
-        product.find({ type:type })
-        .then(products=>{
-            if(products.length<=0){
-                typee.find().deleteOne({ type:type })
-                
-            }else {
+		item.find({type:typee})
+        	.then(items=>{
+				if (items.length>0) 
+				{						
+					reject({ status: 500, message: 'Please delete items of this type first!' });
+					
+				}else{
+					type.deleteOne({ type:typee})
+						.then(result => resolve({ status: 200, message: 'Type Deleted Sucessfully !' }))
 
-				reject({ status: 401, message: 'Remove products first !' });
-			}
-        })
-		
-		.then(bills => resolve({ status: 200, message: 'Type Deleted Sucessfully !' }))
-
-		.catch(err => reject({ status: 500, message: 'Internal Server Error !' }))
-
-	});
+						.catch(err => reject({ status: 500, message: 'Internal Server Error !' }));
+						
+				}
+			})	
+			.catch(err => {reject({ status: 500, message: 'Internal Server Error !' }); }	);	});
+	

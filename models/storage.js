@@ -10,13 +10,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const storageSchema = mongoose.Schema({ 
-
-	datetime        : String,
-	productCode		: String,
+	
+	item			: String,
 	inAmount	    : Number,
 	outAmount 	    : Number,
-	user		    : String
-
+	dateInStock		: String,
+	dateExpiry		: String,
+	price			: Number
 });
 
 mongoose.Promise = global.Promise;

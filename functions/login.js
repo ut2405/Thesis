@@ -25,10 +25,11 @@ exports.loginUser = (email, password) =>
 		.then(user => {
 
 			const hashed_password = user.hashed_password;
-
+			
 			if (bcrypt.compareSync(password, hashed_password)) {
 
 				resolve({ status: 200, message: email });
+				//resolve(user);
 
 			} else {
 

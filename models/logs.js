@@ -9,15 +9,15 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const typeSchema = mongoose.Schema({ 
+const logsSchema = mongoose.Schema({ 
 
-	type 			: String,
-	description		: String,	
-	maxStock		: Number,
-	sumStorage		: Number
+	user 			: String,
+	action		    : String, 
+	time			: String,
+	note	        : String	
 });
 
 mongoose.Promise = global.Promise;
 mongoose.connect(url,{ useNewUrlParser: true, useUnifiedTopology: true });
 
-module.exports = mongoose.model('type', typeSchema);
+module.exports = mongoose.model('logs', logsSchema);

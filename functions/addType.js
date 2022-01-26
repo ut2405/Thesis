@@ -1,30 +1,31 @@
 'use strict';
 
-const product = require('../models/type');
+const type = require('../models/type');
 
-exports.addType = ( type, description) => 
+exports.addType = ( typee, description, maxStock) => 
 
 	new Promise((resolve,reject) => {
-
-		const newType = new type({
-
-			type: amount,
-			description: description
-		});
-
-		newType.save()
-
-		.then(() => resolve({ status: 201, message: 'Type added Sucessfully !' }))
-
-		.catch(err => {
-
-			if (err.code == 11000) {
-
+		type.find({type:typee})
+		.then(types=>{
+			if(types.length>0){
 				reject({ status: 409, message: 'Type Already Added !' });
+			}else{
+				const newType = new type({
 
-			} else {
-
-				reject({ status: 500, message: 'Internal Server Error !' });
+					type: typee,
+					description: description,
+					maxStock: maxStock
+				});
+		
+				newType.save()
+		
+				.then(() => resolve({ status: 201, message: 'Type added Sucessfully !' }))
+		
+				.catch(err => {
+						reject({ status: 500, message: 'Internal Server Error !' });					
+				});
 			}
-		});
+		})
+		.catch();
+		
 	});

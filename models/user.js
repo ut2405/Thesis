@@ -15,8 +15,8 @@ const userSchema = mongoose.Schema({
 	hashed_password	: String,
 	created_at		: String,
 	temp_password	: String,
-	temp_password_time: String
-
+	temp_password_time: String,
+	type			: Number
 });
 
 mongoose.Promise = global.Promise;
