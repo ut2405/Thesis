@@ -11,7 +11,9 @@ exports.addItem = (itemm, description, barcode, type, maxStock) =>
 			if(items.length>0){
 				reject({status: 409, message: 'Item Already Added !'})
 			}else{
-				if(item.find({barcode:barcode})){
+				item.find({barcode:barcode})
+				.then(itemS =>{
+					if(itemS.length>0){
 					reject({status: 409, message: 'Barcode Already Added !'})
 				}else{
 					const newItem = new item({
@@ -36,7 +38,8 @@ exports.addItem = (itemm, description, barcode, type, maxStock) =>
 						
 					});
 				}
-				
+			})
+			
 			}
 		})
 		.catch({ status: 500, message: 'Internal Server Error !' });
