@@ -7,11 +7,11 @@
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.2",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "git-init": "^1.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.5",
-    "mongoose": "^6.1.4",
+    "mongoose": "^6.3.1",
     "morgan": "^1.7.0",
     "nodemailer": "^6.7.2",
     "nodemon": "^2.0.7",
@@ -20,7 +20,7 @@
   "description": "This is my server site!",
   "devDependencies": {},
   "scripts": {
-    "start":"node app.js",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

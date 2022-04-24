@@ -60,7 +60,7 @@ exports.getTotalValue =() =>
 
 		item.find({barcode:barcode})
 
-		.then(items => resolve({ status: 200, message: items[0].item }))
+		.then(items => resolve(items[0]))
 
 		.catch(err => reject({ status: 500, message: 'Internal Server Error !' }))
 

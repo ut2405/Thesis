@@ -453,10 +453,7 @@ module.exports = router => {
 
 	router.get('/getItemOfBC/:id',(req, res)=>{
 		overall.getItem(req.params.id)
-		.then(result =>{
-			
-			res.status(result.status).json({ message: result.message})
-		})
+		.then(result =>	res.json(result))
 		.catch(err => res.status(err.status).json({ message: err.message }));		
 	});
 
