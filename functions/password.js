@@ -77,7 +77,7 @@ exports.resetPasswordInit = email =>
 						pass: `${config.password}`
 					}
 				}
-				`smtps://${config.email}:${config.password}@smtp.gmail.com`);
+				);
 
 			const mailOptions = {
 
