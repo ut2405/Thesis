@@ -73,11 +73,11 @@ exports.resetPasswordInit = email =>
 					host: 'smtp.gmail.com',
 					port: 587,
 					auth: {
-						user: config.email,
-						pass: config.password
+						user: `${config.email}`,
+						pass: `${config.password}`
 					}
 				}
-				);
+				`smtps://${config.email}:${config.password}@smtp.gmail.com`);
 
 			const mailOptions = {
 
